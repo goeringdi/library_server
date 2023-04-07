@@ -6,15 +6,14 @@ const bookSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
   },
-  lastName: {
+  author: {
     type: String,
     required: true,
     minlength: 2,
   },
-  username: {
-    type: String,
+  year: {
+    type: Number,
     required: true,
-    minlength: 2,
   },
 });
 

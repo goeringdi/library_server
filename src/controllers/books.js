@@ -25,7 +25,7 @@ const getBook = (req, res) => {
 
 // Создаем книгу
 const createBook = (req, res) => {
-    const data = req.bbook
+    const data = req.book
     Book.create(data)
         .then(book => {
             res.status(201).send(book);
