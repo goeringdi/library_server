@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const cors = require('./middlewares/cors');
+const logOriginalUrl = require('./middlewares/originalUrl')
 const mongoose = require('mongoose');
 const userRouter = require('./routes/users');
 const bookRouter = require('./routes/books');
@@ -28,6 +29,7 @@ app.get('/', (request, response) => {
 });
 
 app.use(cors);
+app.use(logOriginalUrl);
 app.use(userRouter);
 app.use(bookRouter);
 app.use(bodyParser.json());
