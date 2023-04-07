@@ -4,7 +4,7 @@
  * @param {Function} next - Express 'next()' function
  */
 function logOriginalUrl(request, response, next) {
-    console.log(originalUrl);
+    console.log('Request Type:', request.method);
     next();
   }
 

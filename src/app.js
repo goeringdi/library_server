@@ -17,9 +17,7 @@ const {
     MONGO_URL = 'mongodb://127.0.0.1:27017/test'
 } = process.env;
 
-mongoose.connect(MONGO_URL).
-  catch(error => handleError(error));
-
+mongoose.connect(MONGO_URL)
 
 const app = express();
 
@@ -28,8 +26,25 @@ app.get('/', (request, response) => {
     response.send("Hello, World!");
 });
 
+// Middleware для обработки 404 ошибки
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error);
+});
+   
+// Middleware для обработки ошибок
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.json({
+     error: {
+      message: error.message
+     }
+    });
+});
+
 app.use(cors);
-app.use(logOriginalUrl);
+app.use('/', logOriginalUrl);
 app.use(userRouter);
 app.use(bookRouter);
 app.use(bodyParser.json());
